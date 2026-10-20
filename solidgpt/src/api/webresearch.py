@@ -28,7 +28,8 @@ async def research_answer(body):
     if provider != "parallel":
         raise ResearchError("The configured public research provider is unsupported.", 400)
     parts = body.command.strip().split(maxsplit=1)
-    command, query = parts[0], parts[1].strip() if len(parts) == 2 else ""
+    command = parts[0] if parts else ""
+    query = parts[1].strip() if len(parts) == 2 else ""
     if command not in ("/web", "/fetch") or not query:
         raise ResearchError("Use /web followed by a query, or /fetch followed by one public URL.", 400)
     arguments = {"session_id": str(body.session_id)}

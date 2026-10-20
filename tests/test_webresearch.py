@@ -155,7 +155,7 @@ class ResearchCallerTests(unittest.TestCase):
         self.assertEqual(self.model_requests, [])
 
     def test_invalid_commands_urls_keys_and_identity_do_not_call_network(self):
-        for command in ("/web", "/fetch", "/other query", "/fetch file:///private", "/fetch https://user:pass@example.org",
+        for command in ("   ", "\t\n", "/web", "/fetch", "/other query", "/fetch file:///private", "/fetch https://user:pass@example.org",
                         "/fetch https://example.org/ https://other.org/", "/fetch https://example.org:bad"):
             self.assertEqual(self.query(command).status_code, 400, command)
         self.assertEqual(self.query(key="").status_code, 400)
